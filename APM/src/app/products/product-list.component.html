@@ -18,7 +18,7 @@
         <div class='table-responsive'>
             <table class='table' *ngIf='products.length'>
                 <thead>
-                    <tr>
+                     <tr>
                         <th>
                             <button class='btn btn-primary'
                               (click)='toggleImage()'>
@@ -41,11 +41,19 @@
                                 [style.width.px]='imageWidth'
                                 [style.margin.px]='imageMargin'>
                       </td>
-                      <td>{{product.productName}}</td>
+                      <td>
+                          <a [routerLink]="['/products', product.productId]">
+                            {{product.productName}}
+                          </a>
+                      </td>
                       <td>{{product.productCode | lowercase | convertToSpaces: '-'}}</td>
                       <td>{{product.releaseDate | date: 'yyyy/MM/dd'}}</td>
                       <td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
-                      <td>{{product.starRating}}</td>
+                      <td>
+                         <pm-star [rating]='product.starRating'
+                             (ratingClicked)='onRatingClicked($event)'>
+                         </pm-star>
+                      </td>
                     </tr>
                 </tbody>
             </table>
