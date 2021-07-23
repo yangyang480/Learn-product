@@ -21,8 +21,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     return this._listFilter;
   }
   set listFilter(value: string) {
-    this._listFilter;
-    console.log('In setter:', value);
+    this._listFilter= value;
     this.filteredProducts = this.performFilter(value);
   }
 
@@ -30,9 +29,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: IProduct[] = [];
 
   constructor(private productService: ProductService) { }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
 
   performFilter(filterBy: string): IProduct[] {
     filterBy = filterBy.toLocaleLowerCase();
@@ -54,11 +50,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOndestroy() {
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
   onRatingClicked(message: string): void {
-    this.pageTitle = 'Product List:' + message;
+    this.pageTitle = 'Product List: ' + message;
   }
 }
